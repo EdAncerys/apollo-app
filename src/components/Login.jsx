@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-export default function login({ props }) {
+export default function login() {
   return (
     <div className="features">
       <div className="flex-container-50">

@@ -3,12 +3,13 @@ import React, { useState, useEffect, useMemo } from 'react';
 import './css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import Index from './components/Index';
 import Login from './components/Login';
 import CreateAccount from './components/CreateAccount';
 
 export const AppContext = React.createContext();
 
-function App() {
+function App({ client }) {
   const [accessToken, setAccessToken] = useState(false);
   const [page, setPage] = useState(false);
   const [alert, setAlert] = useState(false);
@@ -18,6 +19,7 @@ function App() {
 
   const manageAppContext = useMemo(
     () => ({
+      client,
       accessToken,
       setAccessToken,
       page,
@@ -27,7 +29,7 @@ function App() {
       spinner,
       setSpinner,
     }),
-    [accessToken, page, alert, spinner]
+    [client, accessToken, page, alert, spinner]
   );
 
   useEffect(() => {
@@ -48,6 +50,7 @@ function App() {
           <div>Hello World!</div>
           <Login />
           <CreateAccount />
+          <Index />
         </div>
       </div>
     </AppContext.Provider>
