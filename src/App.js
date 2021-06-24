@@ -2,7 +2,9 @@ import React, { useState, useEffect, useMemo } from 'react';
 
 import './css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Login from './components/Login';
+import CreateAccount from './components/CreateAccount';
 
 export const AppContext = React.createContext();
 
@@ -45,6 +47,7 @@ function App() {
         <div className="container">
           <div>Hello World!</div>
           <Login />
+          <CreateAccount />
         </div>
       </div>
     </AppContext.Provider>
