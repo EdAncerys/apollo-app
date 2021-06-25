@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { logIn, useAuthDispatch, useAuthState } from '../Context/Auth';
 
@@ -34,7 +34,7 @@ import { logIn, useAuthDispatch, useAuthState } from '../Context/Auth';
 // };
 // login();
 
-export default function Login() {
+export default function Login({ setPage }) {
   const dispatchAuth = useAuthDispatch();
 
   const loginUser = async () => {
@@ -42,9 +42,6 @@ export default function Login() {
     const password = document.querySelector('#password').value;
     logIn({ identifier: email, password: password }, dispatchAuth);
   };
-
-  const { user, jwt } = useAuthState();
-  console.log(jwt);
 
   return (
     <div className="features">
@@ -72,7 +69,7 @@ export default function Login() {
           </Button>
           <div className="divider"></div>
           <Button
-            // onClick={() => manageAppContext.setPage('create-new-account')}
+            onClick={() => setPage('create-new-account')}
             variant="success"
             size="lg"
             className="shadow-none"

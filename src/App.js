@@ -1,28 +1,30 @@
 import React from 'react';
+import { useAuthState } from './Context/Auth';
 
 import './css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Index from './components/Index';
-import Login from './components/Login';
-import CreateAccount from './components/CreateAccount';
-
-export const AppContext = React.createContext();
+import UserAuth from './components/UserAuth';
 
 function App() {
+  const { user, jwt } = useAuthState();
+  console.log(jwt);
+
   return (
     <div className="app">
       <div className="container">
         <div className="features">
           <div className="flex-container-50">
-            <div style={{ textAlign: 'center' }}>
+            <div
+              style={{ textAlign: 'center', color: jwt ? 'tomato' : 'white' }}
+            >
               Skylark Apollo Training App
             </div>
           </div>
         </div>
-        <Login />
-        <CreateAccount />
-        <Index />
+        {!jwt && <UserAuth />}
+        {jwt && <Index />}
       </div>
     </div>
   );

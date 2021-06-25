@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-export default function CreateAccount({ props }) {
+export default function CreateAccount({ setPage }) {
   return (
     <div className="features">
       <div className="flex-container-50">
@@ -39,7 +39,7 @@ export default function CreateAccount({ props }) {
           </Button>
           <div className="divider"></div>
           <Button
-            // onClick={() => manageAppContext.setPage('create-new-account')}
+            onClick={() => setPage(false)}
             variant="success"
             size="lg"
             className="shadow-none"
