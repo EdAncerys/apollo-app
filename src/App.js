@@ -47,7 +47,13 @@ function App({ client }) {
     >
       <div className="app">
         <div className="container">
-          <div>Hello World!</div>
+          <div className="features">
+            <div className="flex-container-50">
+              <div style={{ textAlign: 'center' }}>
+                Skylark Apollo Training App
+              </div>
+            </div>
+          </div>
           <Login />
           <CreateAccount />
           <Index />

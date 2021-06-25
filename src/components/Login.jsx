@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { AppContext } from '../App';
 import { Form, Button } from 'react-bootstrap';
 
-export default function login() {
+export default function Login() {
+  // const { manageAppContext } = useContext(AppContext);
+
   return (
     <div className="features">
       <div className="flex-container-50">

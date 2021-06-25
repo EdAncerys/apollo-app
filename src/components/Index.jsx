@@ -3,21 +3,20 @@ import { AppContext } from '../App';
 import { Card, Table, Button } from 'react-bootstrap';
 import { gql, useQuery } from '@apollo/client';
 
-export default function CustomerCard({ props }) {
+export default function Index({ props }) {
   const { manageAppContext } = useContext(AppContext);
   const [posts, setPosts] = useState([]);
 
-  const GET_POSTS = gql`
-    query allPosts {
-      posts {
-        id
-        title
-        body
-      }
-    }
-  `;
-
   function GetPosts() {
+    const GET_POSTS = gql`
+      query allPosts {
+        posts {
+          id
+          title
+          body
+        }
+      }
+    `;
     const { loading, error, data } = useQuery(GET_POSTS);
 
     if (loading) return `Fetching...`;
@@ -50,7 +49,6 @@ export default function CustomerCard({ props }) {
       </tbody>
     );
   }
-  // const allPosts = useQuery(GET_POSTS).data;
 
   return (
     <div>
