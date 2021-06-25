@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from 'react';
-import { AppContext } from '../App';
+import React, { useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { logIn, useAuthDispatch, useAuthState } from '../Context/Auth';
 
@@ -37,13 +36,15 @@ import { logIn, useAuthDispatch, useAuthState } from '../Context/Auth';
 
 export default function Login() {
   const dispatchAuth = useAuthDispatch();
-  useEffect(() => {
-    logIn({ identifier: 'john@email.com', password: 'password' }, dispatchAuth);
-  }, []);
+
+  const loginUser = async () => {
+    const email = document.querySelector('#email').value;
+    const password = document.querySelector('#password').value;
+    logIn({ identifier: email, password: password }, dispatchAuth);
+  };
+
   const { user, jwt } = useAuthState();
   console.log(jwt);
-
-  const { manageAppContext } = useContext(AppContext);
 
   return (
     <div className="features">
@@ -51,31 +52,18 @@ export default function Login() {
         <Form className="form-container">
           <Form.Group className="mb-3">
             <Form.Label>Email address</Form.Label>
-            <Form.Control
-              id="loginEmail"
-              type="email"
-              placeholder="Enter email"
-            />
+            <Form.Control id="email" type="email" placeholder="Enter email" />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
             <Form.Control
-              id="loginPassword"
+              id="password"
               type="password"
               placeholder="Password"
             />
           </Form.Group>
           <Button
-            // onClick={(e) => {
-            //   e.preventDefault();
-            //   login({
-            //     variables: {
-            //       identifier: 'john@email.com',
-            //       password: 'password',
-            //     },
-            //   });
-            // }}
-            // onClick={() => LoginMutation()}
+            onClick={() => loginUser()}
             variant="primary"
             size="lg"
             className="shadow-none"

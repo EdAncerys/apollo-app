@@ -1,53 +1,52 @@
-import React, { useContext, useState } from 'react';
-import { AppContext } from '../App';
+import React, { useContext } from 'react';
 import { Card, Table, Button } from 'react-bootstrap';
 import { gql, useQuery } from '@apollo/client';
 
 export default function Index({ props }) {
-  const { manageAppContext } = useContext(AppContext);
+  const data = [];
 
-  function GetPosts() {
-    const GET_POSTS = gql`
-      query allPosts {
-        posts {
-          id
-          title
-          body
-        }
-      }
-    `;
-    const { loading, error, data } = useQuery(GET_POSTS);
+  // function GetPosts() {
+  //   const GET_POSTS = gql`
+  //     query allPosts {
+  //       posts {
+  //         id
+  //         title
+  //         body
+  //       }
+  //     }
+  //   `;
+  //   const { loading, error, data } = useQuery(GET_POSTS);
 
-    if (loading) return console.log(`Fetching...`);
-    if (error) return console.log(`Error! ${error.message}`);
-    console.log(data);
+  //   if (loading) return console.log(`Fetching...`);
+  //   if (error) return console.log(`Error! ${error.message}`);
+  //   console.log(data);
 
-    return (
-      <tbody>
-        {data.posts.map((post, index) => {
-          return (
-            <tr key={post.id.toString() + `a`}>
-              <td key={post.id.toString() + `b`}>{index + 1}</td>
-              <td key={post.id.toString() + `c`}>
-                <div key={index + 1}>{post.title}</div>
-              </td>
+  //   return (
+  //     <tbody>
+  //       {data.posts.map((post, index) => {
+  //         return (
+  //           <tr key={post.id.toString() + `a`}>
+  //             <td key={post.id.toString() + `b`}>{index + 1}</td>
+  //             <td key={post.id.toString() + `c`}>
+  //               <div key={index + 1}>{post.title}</div>
+  //             </td>
 
-              <td key={post.id.toString() + `d`}>
-                <Button
-                  // onClick={() => setFindContract(post.id)}
-                  id={post.id}
-                  size="sm"
-                  className="shadow-none"
-                >
-                  Go To Article
-                </Button>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    );
-  }
+  //             <td key={post.id.toString() + `d`}>
+  //               <Button
+  //                 // onClick={() => setFindContract(post.id)}
+  //                 id={post.id}
+  //                 size="sm"
+  //                 className="shadow-none"
+  //               >
+  //                 Go To Article
+  //               </Button>
+  //             </td>
+  //           </tr>
+  //         );
+  //       })}
+  //     </tbody>
+  //   );
+  // }
 
   return (
     <div>
@@ -64,7 +63,7 @@ export default function Index({ props }) {
                 <th>More</th>
               </tr>
             </thead>
-            {GetPosts()}
+            {/* {GetPosts()} */}
           </Table>
         </Card.Body>
       </Card>
