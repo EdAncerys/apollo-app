@@ -1,66 +1,49 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../App';
 import { Form, Button } from 'react-bootstrap';
-import { gql, useMutation } from '@apollo/client';
+import { logIn, useAuthDispatch, useAuthState } from '../Context/Auth';
+
+// import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+
+// export const MUTATION_LOG_IN = gql`
+//   mutation login($identifier: String!, $password: String!) {
+//     login(input: { identifier: $identifier, password: $password }) {
+//       jwt
+//       user {
+//         id
+//         username
+//         email
+//         role {
+//           name
+//           type
+//         }
+//       }
+//     }
+//   }
+// `;
+// const client = new ApolloClient({
+//   uri: 'http://localhost:1337/graphql',
+//   cache: new InMemoryCache(),
+// });
+
+// const login = async () => {
+//   const logInResponse = await client.mutate({
+//     mutation: MUTATION_LOG_IN,
+//     variables: { identifier: 'john@email.com', password: 'password' },
+//   });
+//   console.log('logInResponse', logInResponse); //debug
+// };
+// login();
 
 export default function Login() {
+  const dispatchAuth = useAuthDispatch();
+  useEffect(() => {
+    logIn({ identifier: 'john@email.com', password: 'password' }, dispatchAuth);
+  }, []);
+  const { user, jwt } = useAuthState();
+  console.log(jwt);
+
   const { manageAppContext } = useContext(AppContext);
-
-  // const USER_LOGIN = gql`
-  //   mutation login($identifier: String!, $password: String!) {
-  //     login(input: { identifier: "john@email.com", password: "password" }) {
-  //       jwt
-  //       user {
-  //         id
-  //         username
-  //         email
-  //         role {
-  //           name
-  //           type
-  //         }
-  //       }
-  //     }
-  //   }
-  // `;
-
-  const LOGIN_MUTATION = gql`
-    mutation LoginMutation($identifier: String!, $password: String!) {
-      login(input: { identifier: "john@email.com", password: "password" }) {
-        jwt
-        user {
-          id
-          username
-          email
-          role {
-            name
-            type
-          }
-        }
-      }
-    }
-  `;
-
-  // function LoginMutation() {
-  //   const [login, { loading, error, data }] = useMutation(LOGIN_MUTATION);
-
-  //   if (loading) return console.log(`Fetching...`);
-  //   if (error) return console.log(`Error! ${error.message}`);
-  //   console.log(data);
-  // }
-
-  // const [login, { loading, error, data }] = useMutation(LOGIN_MUTATION);
-  // console.log(error);
-  // console.log(data);
-
-  // const [login, { data }] = useMutation(LOGIN_MUTATION, {
-  //   variables: {
-  //     email: 'john@email.com',
-  //     password: 'password',
-  //   },
-  //   onCompleted: ({ login }) => {
-  //     console.log(login);
-  //   },
-  // });
 
   return (
     <div className="features">

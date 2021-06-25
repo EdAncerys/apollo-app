@@ -65,7 +65,7 @@ import { MUTATION_LOG_IN } from '../../apollo/mutations/auth';
 //   }
 // };
 
-export const logIn = async (loginData) => {
+export const logIn = async (loginData, dispatchAuth) => {
   try {
     //0. Set loading true
 
@@ -74,20 +74,26 @@ export const logIn = async (loginData) => {
       mutation: MUTATION_LOG_IN,
       variables: loginData,
     });
-    // console.log('logInResponse', logInResponse);//debug
+    console.log('logInResponse', logInResponse); //debug
     const { jwt, user } = logInResponse.data.login;
     const { id } = user;
 
     //2. set jwt, in context and cookie
-    // setToken(dispatchAuth, jwt);
-
-    //3. Create log in
-    // console.log('createLogInResponse', createLogInResponse); //debug
+    setToken(dispatchAuth, jwt);
 
     //4. Get user data, and set user, in context and cookie
+    setUser(dispatchAuth, user);
 
     //5. Router push
   } catch (err) {
     console.log('err', err); //debug
   }
+};
+
+export const setToken = (dispatch, jwt) => {
+  dispatch({ type: 'SET_TOKEN', payload: jwt });
+};
+
+export const setUser = (dispatch, user) => {
+  dispatch({ type: 'SET_USER', payload: user });
 };
