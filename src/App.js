@@ -9,7 +9,7 @@ import CreateAccount from './components/CreateAccount';
 
 export const AppContext = React.createContext();
 
-function App({ client }) {
+function App({}) {
   const [accessToken, setAccessToken] = useState(false);
   const [page, setPage] = useState(false);
   const [alert, setAlert] = useState(false);
@@ -19,7 +19,6 @@ function App({ client }) {
 
   const manageAppContext = useMemo(
     () => ({
-      client,
       accessToken,
       setAccessToken,
       page,
@@ -29,7 +28,7 @@ function App({ client }) {
       spinner,
       setSpinner,
     }),
-    [client, accessToken, page, alert, spinner]
+    [accessToken, page, alert, spinner]
   );
 
   useEffect(() => {
@@ -56,7 +55,7 @@ function App({ client }) {
           </div>
           <Login />
           <CreateAccount />
-          <Index />
+          {/* <Index /> */}
         </div>
       </div>
     </AppContext.Provider>

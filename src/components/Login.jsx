@@ -48,9 +48,9 @@ export default function Login() {
   //   console.log(data);
   // }
 
-  const [login, { loading, error, data }] = useMutation(LOGIN_MUTATION);
-  console.log(error);
-  console.log(data);
+  // const [login, { loading, error, data }] = useMutation(LOGIN_MUTATION);
+  // console.log(error);
+  // console.log(data);
 
   // const [login, { data }] = useMutation(LOGIN_MUTATION, {
   //   variables: {
@@ -83,15 +83,15 @@ export default function Login() {
             />
           </Form.Group>
           <Button
-            onClick={(e) => {
-              e.preventDefault();
-              login({
-                variables: {
-                  identifier: 'john@email.com',
-                  password: 'password',
-                },
-              });
-            }}
+            // onClick={(e) => {
+            //   e.preventDefault();
+            //   login({
+            //     variables: {
+            //       identifier: 'john@email.com',
+            //       password: 'password',
+            //     },
+            //   });
+            // }}
             // onClick={() => LoginMutation()}
             variant="primary"
             size="lg"
