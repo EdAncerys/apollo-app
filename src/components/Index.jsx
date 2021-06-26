@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Card, Table, Button } from 'react-bootstrap';
-import { gql, useQuery } from '@apollo/client';
 
 export default function Index({ props }) {
   const data = [];

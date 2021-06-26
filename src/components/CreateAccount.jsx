@@ -1,7 +1,20 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { signUp, useAuthDispatch } from '../Context/Auth/index';
 
 export default function CreateAccount({ setPage }) {
+  const dispatchAuth = useAuthDispatch();
+
+  const loginUser = async () => {
+    const username = document.querySelector('#username').value;
+    const email = document.querySelector('#email').value;
+    const password = document.querySelector('#password').value;
+    signUp(
+      { username: username, email: email, password: password },
+      dispatchAuth
+    );
+  };
+
   return (
     <div className="features">
       <div className="flex-container-50">
@@ -14,7 +27,7 @@ export default function CreateAccount({ setPage }) {
           <Form.Group className="mb-3">
             <Form.Label>Email address</Form.Label>
             <Form.Control
-              id="createAccountEmail"
+              id="email"
               type="email"
               placeholder="Enter email"
             />
@@ -23,14 +36,14 @@ export default function CreateAccount({ setPage }) {
           <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
             <Form.Control
-              id="createAccountPassword"
+              id="password"
               type="password"
               placeholder="Password"
             />
           </Form.Group>
 
           <Button
-            // onClick={() => userLogin()}
+            onClick={() => loginUser()}
             variant="primary"
             size="lg"
             className="shadow-none"

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { logIn, useAuthDispatch, useAuthState } from '../Context/Auth';
+import { logIn, useAuthDispatch } from '../Context/Auth/index';
 
 // import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
