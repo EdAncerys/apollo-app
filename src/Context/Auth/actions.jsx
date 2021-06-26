@@ -65,7 +65,7 @@ export const getPosts = async (jwt) => {
     });
     console.log('getPostsResponse', getPostsResponse); //debug
     const { posts } = getPostsResponse.data;
-    console.log('user', posts); //debug
+    console.log('posts', posts); //debug
     return posts;
   } catch (err) {
     console.log(err); //debug

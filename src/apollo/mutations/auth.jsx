@@ -35,6 +35,10 @@ export const QUERY_GET_POSTS = gql`
       id
       title
       body
+      image {
+        id
+        url
+      }
     }
   }
 `;
