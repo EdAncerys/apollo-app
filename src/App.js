@@ -8,9 +8,7 @@ import Index from './components/Index';
 import UserAuth from './components/UserAuth';
 
 function App() {
-  const { user, jwt } = useAuthState();
-  console.log(jwt);
-  console.log(user);
+  const { jwt } = useAuthState();
 
   return (
     <div className="app">

@@ -29,7 +29,7 @@ export const MUTATION_SIGN_UP = gql`
   }
 `;
 
-export const QUERY_GET_POSTS = gql`
+export const QUERY_GET_ONE_POST = gql`
   query posts {
     posts {
       id
@@ -39,6 +39,16 @@ export const QUERY_GET_POSTS = gql`
         id
         url
       }
+    }
+  }
+`;
+
+export const QUERY_GET_POSTS = gql`
+  query posts {
+    posts {
+      id
+      title
+      body
     }
   }
 `;

@@ -7,7 +7,9 @@ const user = {
   },
 };
 
-export const initialState = { jwt: '', user };
+const posts = {};
+
+export const initialState = { jwt: '', user, posts };
 
 export const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -15,6 +17,8 @@ export const AuthReducer = (state = initialState, action) => {
       return { ...state, jwt: action.payload };
     case 'SET_USER':
       return { ...state, user: { ...action.payload } };
+    case 'SET_POSTS':
+      return { ...state, posts: { ...action.payload } };
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

@@ -3,6 +3,7 @@ import {
   MUTATION_LOG_IN,
   MUTATION_SIGN_UP,
   QUERY_GET_POSTS,
+  QUERY_GET_ONE_POST,
 } from '../../apollo/mutations/auth';
 
 export const signUp = async (newUserData, dispatchAuth) => {
@@ -37,13 +38,11 @@ export const logIn = async (loginData, dispatchAuth) => {
     });
     console.log('logInResponse', logInResponse); //debug
     const { jwt, user } = logInResponse.data.login;
-    const { id } = user;
-    console.log('id', id); //debug
 
     //2. set jwt, in context and cookie
     setToken(dispatchAuth, jwt);
 
-    //4. Get user data, and set user, in context and cookie
+    //4. Get user data, and set user in context
     setUser(dispatchAuth, user);
 
     //5. Router push
@@ -52,7 +51,7 @@ export const logIn = async (loginData, dispatchAuth) => {
   }
 };
 
-export const getPosts = async (jwt) => {
+export const getPosts = async (jwt, dispatchAuth) => {
   // console.log('getUser triggered')
   try {
     const getPostsResponse = await client.query({
@@ -66,6 +65,10 @@ export const getPosts = async (jwt) => {
     console.log('getPostsResponse', getPostsResponse); //debug
     const { posts } = getPostsResponse.data;
     console.log('posts', posts); //debug
+
+    //2. set posts in context
+    setPosts(dispatchAuth, posts);
+
     return posts;
   } catch (err) {
     console.log(err); //debug
@@ -78,4 +81,8 @@ export const setToken = (dispatch, jwt) => {
 
 export const setUser = (dispatch, user) => {
   dispatch({ type: 'SET_USER', payload: user });
+};
+
+export const setPosts = (dispatch, post) => {
+  dispatch({ type: 'SET_POSTS', payload: post });
 };

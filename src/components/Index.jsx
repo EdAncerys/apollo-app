@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useAuthState } from '../Context/Auth/index';
 import { Card, Table, Button } from 'react-bootstrap';
-import { getPosts } from '../Context/Auth/index';
+import { getPosts, useAuthDispatch } from '../Context/Auth/index';
 
 export default function Index({ props }) {
-  const [posts, setPosts] = useState([]);
-  const { jwt } = useAuthState();
+  const dispatchAuth = useAuthDispatch();
+  const { jwt, posts } = useAuthState();
+  const data = Object.entries(posts).map(([key, value]) => value);
   console.log('posts ', posts);
+  console.log('data ', data);
 
-  const renderPosts = async (jwt) => {
-    const data = await getPosts(jwt);
-    setPosts(data);
-  };
-
-  if (jwt) renderPosts();
+  useEffect(() => {
+    getPosts(jwt, dispatchAuth);
+  }, [jwt]);
 
   return (
     <div>
@@ -31,7 +30,7 @@ export default function Index({ props }) {
               </tr>
             </thead>
             <tbody>
-              {posts.map((post, index) => {
+              {data.map((post, index) => {
                 console.log(post.title);
                 return (
                   <tr key={post.id.toString() + `a`}>
