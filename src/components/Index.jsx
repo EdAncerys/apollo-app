@@ -1,8 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useAuthState } from '../Context/Auth/index';
 import { Card, Table, Button } from 'react-bootstrap';
+import { getPosts } from '../Context/Auth/index';
 
 export default function Index({ props }) {
-  const data = [];
+  const { jwt } = useAuthState();
+
+  if (jwt) getPosts(jwt);
+  const loginUser = async (jwt) => {};
 
   // function GetPosts() {
   //   const GET_POSTS = gql`

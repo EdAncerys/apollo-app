@@ -1,5 +1,9 @@
 import client from '../../apollo/ApolloClient';
-import { MUTATION_LOG_IN, MUTATION_SIGN_UP } from '../../apollo/mutations/auth';
+import {
+  MUTATION_LOG_IN,
+  MUTATION_SIGN_UP,
+  QUERY_GET_POSTS,
+} from '../../apollo/mutations/auth';
 
 export const signUp = async (newUserData, dispatchAuth) => {
   try {
@@ -34,6 +38,7 @@ export const logIn = async (loginData, dispatchAuth) => {
     console.log('logInResponse', logInResponse); //debug
     const { jwt, user } = logInResponse.data.login;
     const { id } = user;
+    console.log('id', id); //debug
 
     //2. set jwt, in context and cookie
     setToken(dispatchAuth, jwt);
@@ -44,6 +49,26 @@ export const logIn = async (loginData, dispatchAuth) => {
     //5. Router push
   } catch (err) {
     console.log('err', err); //debug
+  }
+};
+
+export const getPosts = async (jwt) => {
+  // console.log('getUser triggered')
+  try {
+    const getPostsResponse = await client.query({
+      query: QUERY_GET_POSTS,
+      context: {
+        headers: {
+          Authorization: jwt ? `Bearer ${jwt}` : '',
+        },
+      },
+    });
+    console.log('getPostsResponse', getPostsResponse); //debug
+    const { posts } = getPostsResponse.data;
+    console.log('user', posts); //debug
+    return posts;
+  } catch (err) {
+    console.log(err); //debug
   }
 };
 

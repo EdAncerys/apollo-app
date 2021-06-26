@@ -28,3 +28,13 @@ export const MUTATION_SIGN_UP = gql`
     }
   }
 `;
+
+export const QUERY_GET_POSTS = gql`
+  query posts {
+    posts {
+      id
+      title
+      body
+    }
+  }
+`;

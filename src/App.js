@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuthState } from './Context/Auth';
+import { useAuthState } from './Context/Auth/index';
 
 import './css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,6 +10,7 @@ import UserAuth from './components/UserAuth';
 function App() {
   const { user, jwt } = useAuthState();
   console.log(jwt);
+  console.log(user);
 
   return (
     <div className="app">
