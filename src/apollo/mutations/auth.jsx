@@ -30,8 +30,8 @@ export const MUTATION_SIGN_UP = gql`
 `;
 
 export const QUERY_GET_ONE_POST = gql`
-  query posts {
-    posts {
+  query getOnePost($id: ID!) {
+    post(id: $id) {
       id
       title
       body

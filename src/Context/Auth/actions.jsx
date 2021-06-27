@@ -52,7 +52,7 @@ export const logIn = async (loginData, dispatchAuth) => {
 };
 
 export const getPosts = async (jwt, dispatchAuth) => {
-  // console.log('getUser triggered')
+  // console.log('getPosts triggered')
   try {
     const getPostsResponse = await client.query({
       query: QUERY_GET_POSTS,
@@ -75,6 +75,32 @@ export const getPosts = async (jwt, dispatchAuth) => {
   }
 };
 
+export const getOnePost = async (jwt, id, dispatchAuth) => {
+  console.log('jwt', jwt);
+  console.log('id', id);
+  try {
+    const getPostsResponse = await client.query({
+      query: QUERY_GET_ONE_POST,
+      variables: { id: id },
+      context: {
+        headers: {
+          Authorization: jwt ? `Bearer ${jwt}` : '',
+        },
+      },
+    });
+    console.log('getPostsResponse', getPostsResponse); //debug
+    const { post } = getPostsResponse.data;
+    console.log('post', post); //debug
+
+    //2. set posts in context
+    setOnePost(dispatchAuth, post);
+
+    return post;
+  } catch (err) {
+    console.log(err); //debug
+  }
+};
+
 export const setToken = (dispatch, jwt) => {
   dispatch({ type: 'SET_TOKEN', payload: jwt });
 };
@@ -83,6 +109,10 @@ export const setUser = (dispatch, user) => {
   dispatch({ type: 'SET_USER', payload: user });
 };
 
-export const setPosts = (dispatch, post) => {
-  dispatch({ type: 'SET_POSTS', payload: post });
+export const setOnePost = (dispatch, post) => {
+  dispatch({ type: 'SET_ONE_POST', payload: post });
+};
+
+export const setPosts = (dispatch, posts) => {
+  dispatch({ type: 'SET_POSTS', payload: posts });
 };

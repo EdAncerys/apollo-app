@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAuthState } from '../Context/Auth/index';
 import { Card, Table, Button } from 'react-bootstrap';
-import { getPosts, useAuthDispatch } from '../Context/Auth/index';
+import { getPosts, getOnePost, useAuthDispatch } from '../Context/Auth/index';
 
 export default function Index({ props }) {
   const dispatchAuth = useAuthDispatch();
@@ -12,7 +12,7 @@ export default function Index({ props }) {
 
   useEffect(() => {
     getPosts(jwt, dispatchAuth);
-  }, [jwt]);
+  }, [jwt, dispatchAuth]);
 
   return (
     <div>
@@ -31,7 +31,6 @@ export default function Index({ props }) {
             </thead>
             <tbody>
               {data.map((post, index) => {
-                console.log(post.title);
                 return (
                   <tr key={post.id.toString() + `a`}>
                     <td key={post.id.toString() + `b`}>{index + 1}</td>
@@ -40,7 +39,7 @@ export default function Index({ props }) {
                     </td>
                     <td key={post.id.toString() + `d`}>
                       <Button
-                        // onClick={() => setFindContract(post.id)}
+                        onClick={() => getOnePost(jwt, post.id, dispatchAuth)}
                         id={post.id}
                         size="sm"
                         className="shadow-none"
