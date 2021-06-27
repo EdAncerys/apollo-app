@@ -12,10 +12,28 @@ export default function PostCard({ props }) {
       <Card.Header>
         <div style={{ textAlign: 'center' }}>{onePost.title}</div>
       </Card.Header>
-      {onePost.image.map((img) => {
-        console.log(img.url);
-        // <Card.Img variant="top" src=`${img.url}/100px180` />
-      })}
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'flex-start',
+          justifyContent: 'center',
+          margin: '5px',
+        }}
+      >
+        {onePost.image.map((img) => {
+          const url = `http://localhost:1337` + img.url;
+          console.log(url);
+          return (
+            <Card.Img
+              src={url}
+              alt="Card image"
+              key={img.id.toString()}
+              style={{ width: '25%', padding: '2px' }}
+            />
+          );
+        })}
+      </div>
       <Card.Body>
         <Card.Text>{onePost.body}</Card.Text>
       </Card.Body>
