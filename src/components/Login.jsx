@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { logIn, useAuthDispatch } from '../Context/Auth/index';
 
 export default function Login({ setPage }) {
   const dispatchAuth = useAuthDispatch();
+
+  useEffect(() => {
+    const listener = (event) => {
+      if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+        event.preventDefault();
+        loginUser();
+      }
+    };
+    document.addEventListener('keydown', listener);
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
+  });
 
   const loginUser = async () => {
     const email = document.querySelector('#email').value;
@@ -41,7 +54,7 @@ export default function Login({ setPage }) {
             onClick={() => setPage('create-new-account')}
             variant="success"
             size="lg"
-            className="shadow-none"
+            className="shadow-none mt-3"
           >
             Create New Account
           </Button>

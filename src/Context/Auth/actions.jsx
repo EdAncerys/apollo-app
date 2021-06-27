@@ -76,8 +76,6 @@ export const getPosts = async (jwt, dispatchAuth) => {
 };
 
 export const getOnePost = async (jwt, id, dispatchAuth) => {
-  console.log('jwt', jwt);
-  console.log('id', id);
   try {
     const getPostsResponse = await client.query({
       query: QUERY_GET_ONE_POST,

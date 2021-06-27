@@ -26,11 +26,7 @@ export default function CreateAccount({ setPage }) {
 
           <Form.Group className="mb-3">
             <Form.Label>Email address</Form.Label>
-            <Form.Control
-              id="email"
-              type="email"
-              placeholder="Enter email"
-            />
+            <Form.Control id="email" type="email" placeholder="Enter email" />
           </Form.Group>
 
           <Form.Group className="mb-3">
@@ -55,7 +51,7 @@ export default function CreateAccount({ setPage }) {
             onClick={() => setPage(false)}
             variant="success"
             size="lg"
-            className="shadow-none"
+            className="shadow-none mt-3"
           >
             Log In
           </Button>
