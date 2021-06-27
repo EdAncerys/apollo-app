@@ -2,6 +2,7 @@ import React from 'react';
 import { useAuthState } from '../Context/Auth/index';
 
 import PostIndexCard from './PostIndexCard';
+import PostCard from './PostCard';
 
 export default function Index({ props }) {
   const { onePost, posts } = useAuthState();
@@ -9,8 +10,8 @@ export default function Index({ props }) {
 
   return (
     <div>
-      {posts && !onePost && <PostIndexCard />}
-      {onePost && <div>hello world</div>}
+      {posts && !onePost.title && <PostIndexCard />}
+      {onePost.title && <PostCard />}
     </div>
   );
 }

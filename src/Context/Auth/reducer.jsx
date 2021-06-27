@@ -7,7 +7,7 @@ const user = {
   },
 };
 
-const onePost = false;
+const onePost = {};
 const posts = {};
 
 export const initialState = { jwt: '', user, onePost, posts };
