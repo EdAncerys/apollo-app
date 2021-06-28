@@ -39,6 +39,10 @@ export const QUERY_GET_ONE_POST = gql`
         id
         url
       }
+      tags {
+        id
+        tagName
+      }
       users_post {
         id
         email

@@ -9,9 +9,13 @@ export default function PostCard({ props }) {
 
   return (
     <Card bg="Light" text="dark" style={{ width: '100%' }} className="mb-2">
-      <Card.Header>
-        <span style={{ textAlign: 'center' }}>{onePost.title}</span>
+      <Card.Header style={{ textAlign: 'center' }}>
+        {onePost.title}
+        <br />
       </Card.Header>
+      <span style={{ textAlign: 'center', fontSize: '16px', margin: '10px' }}>
+        Post by: {onePost.users_post.username}
+      </span>
       <span
         style={{
           display: 'flex',
@@ -36,6 +40,18 @@ export default function PostCard({ props }) {
       </span>
       <Card.Body>
         <Card.Text>{onePost.body}</Card.Text>
+        <Card.Text>
+          {onePost.tags.map((tag) => {
+            return (
+              <span
+                style={{ fontSize: '16px', color: 'silver', margin: '5px' }}
+                key={tag.id.toString()}
+              >
+                {tag.tagName}
+              </span>
+            );
+          })}
+        </Card.Text>
       </Card.Body>
       <Button
         onClick={() => setOnePost(dispatchAuth, false)}
