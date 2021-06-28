@@ -58,6 +58,7 @@ export const getPosts = async (jwt, dispatchAuth) => {
   try {
     const getPostsResponse = await client.query({
       query: QUERY_GET_POSTS,
+      fetchPolicy: 'no-cache',
       context: {
         headers: {
           Authorization: jwt ? `Bearer ${jwt}` : '',
