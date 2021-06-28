@@ -7,15 +7,21 @@ export default function PostCard({ props }) {
   const dispatchAuth = useAuthDispatch();
   const { onePost } = useAuthState();
 
+  let postAuthor;
+  const findPostAuthor = onePost.users_post;
+  if (findPostAuthor) postAuthor = onePost.users_post.username;
+
   return (
     <Card bg="Light" text="dark" style={{ width: '100%' }} className="mb-2">
       <Card.Header style={{ textAlign: 'center' }}>
         {onePost.title}
         <br />
       </Card.Header>
-      <span style={{ textAlign: 'center', fontSize: '16px', margin: '10px' }}>
-        Post by: {onePost.users_post.username}
-      </span>
+      {findPostAuthor && (
+        <span style={{ textAlign: 'center', fontSize: '16px', margin: '10px' }}>
+          Post by: {postAuthor}
+        </span>
+      )}
       <span
         style={{
           display: 'flex',
