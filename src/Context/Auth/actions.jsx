@@ -4,6 +4,7 @@ import {
   MUTATION_SIGN_UP,
   QUERY_GET_POSTS,
   QUERY_GET_ONE_POST,
+  MUTATION_CREATE_POST,
 } from '../../apollo/mutations/auth';
 
 export const signUp = async (newUserData, dispatchAuth) => {
@@ -99,6 +100,27 @@ export const getOnePost = async (jwt, id, dispatchAuth) => {
   }
 };
 
+export const createNewPost = async (newPostData, jwt, dispatchAuth) => {
+  console.log('newPostData', newPostData);
+  try {
+    //0. Set loading true
+
+    //1. Create new post
+    const createPostResponse = await client.mutate({
+      mutation: MUTATION_CREATE_POST,
+      variables: newPostData,
+    });
+    console.log('createPostResponse', createPostResponse); //debug
+
+    //2. Fetch all post
+    getPosts(jwt, dispatchAuth);
+  } catch (err) {
+    console.log('err', err); //debug
+    // console.log(typeof err); //debug
+    // console.log(JSON.stringify(err)); //debug
+  }
+};
+
 export const setToken = (dispatch, jwt) => {
   dispatch({ type: 'SET_TOKEN', payload: jwt });
 };
@@ -113,4 +135,8 @@ export const setOnePost = (dispatch, post) => {
 
 export const setPosts = (dispatch, posts) => {
   dispatch({ type: 'SET_POSTS', payload: posts });
+};
+
+export const createPostAction = (dispatch, posts) => {
+  dispatch({ type: 'SET_CREATE_POST_ACTION', payload: posts });
 };

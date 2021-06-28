@@ -3,15 +3,17 @@ import { useAuthState } from '../Context/Auth/index';
 
 import PostIndexCard from './PostIndexCard';
 import PostCard from './PostCard';
+import CreatePostCard from './CreatePostCard';
 
 export default function Index({ props }) {
-  const { onePost, posts } = useAuthState();
-  console.log(onePost);
+  const { onePost, posts, createPostAction } = useAuthState();
+  console.log(createPostAction);
 
   return (
-    <div>
-      {posts && !onePost.title && <PostIndexCard />}
+    <>
+      {posts && !onePost.title && !createPostAction.action && <PostIndexCard />}
       {onePost.title && <PostCard />}
-    </div>
+      {createPostAction.action && <CreatePostCard />}
+    </>
   );
 }

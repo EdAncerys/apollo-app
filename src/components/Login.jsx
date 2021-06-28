@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
 import { logIn, useAuthDispatch } from '../Context/Auth/index';
+import { Form, Button } from 'react-bootstrap';
 
 export default function Login({ setPage }) {
   const dispatchAuth = useAuthDispatch();

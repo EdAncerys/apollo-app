@@ -1,5 +1,13 @@
 import { AuthProvider, useAuthDispatch, useAuthState } from './context';
-import { logIn, signUp, getPosts, getOnePost, setOnePost } from './actions';
+import {
+  logIn,
+  signUp,
+  getPosts,
+  getOnePost,
+  setOnePost,
+  createNewPost,
+  createPostAction,
+} from './actions';
 
 export {
   AuthProvider,
@@ -10,4 +18,6 @@ export {
   getPosts,
   getOnePost,
   setOnePost,
+  createNewPost,
+  createPostAction,
 };

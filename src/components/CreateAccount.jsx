@@ -1,6 +1,6 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
 import { signUp, useAuthDispatch } from '../Context/Auth/index';
+import { Form, Button } from 'react-bootstrap';
 
 export default function CreateAccount({ setPage }) {
   const dispatchAuth = useAuthDispatch();
@@ -46,7 +46,11 @@ export default function CreateAccount({ setPage }) {
           >
             Create New Account
           </Button>
-          <div className="divider"></div>
+
+          <Form.Text style={{ fontSize: '12px' }} className="text-muted">
+            By creating account you agree with our Terms & Conditions.
+          </Form.Text>
+
           <Button
             onClick={() => setPage(false)}
             variant="success"

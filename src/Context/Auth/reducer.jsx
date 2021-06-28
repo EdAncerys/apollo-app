@@ -9,8 +9,9 @@ const user = {
 
 const onePost = {};
 const posts = {};
+const createPostAction = { action: false };
 
-export const initialState = { jwt: '', user, onePost, posts };
+export const initialState = { jwt: '', user, onePost, posts, createPostAction };
 
 export const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -22,6 +23,8 @@ export const AuthReducer = (state = initialState, action) => {
       return { ...state, posts: { ...action.payload } };
     case 'SET_ONE_POST':
       return { ...state, onePost: { ...action.payload } };
+    case 'SET_CREATE_POST_ACTION':
+      return { ...state, createPostAction: { ...action.payload } };
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuthState } from '../Context/Auth/index';
-import { Card, Button } from 'react-bootstrap';
 import { setOnePost, useAuthDispatch } from '../Context/Auth/index';
+import { Card, Button } from 'react-bootstrap';
 
 export default function PostCard({ props }) {
   const dispatchAuth = useAuthDispatch();
@@ -10,9 +10,9 @@ export default function PostCard({ props }) {
   return (
     <Card bg="Light" text="dark" style={{ width: '100%' }} className="mb-2">
       <Card.Header>
-        <div style={{ textAlign: 'center' }}>{onePost.title}</div>
+        <span style={{ textAlign: 'center' }}>{onePost.title}</span>
       </Card.Header>
-      <div
+      <span
         style={{
           display: 'flex',
           flexWrap: 'wrap',
@@ -33,17 +33,32 @@ export default function PostCard({ props }) {
             />
           );
         })}
-      </div>
+      </span>
       <Card.Body>
         <Card.Text>{onePost.body}</Card.Text>
       </Card.Body>
       <Button
         onClick={() => setOnePost(dispatchAuth, false)}
-        id={onePost.id}
         size="sm"
         className="shadow-none"
       >
         Go Back
+      </Button>
+      <Button
+        // onClick={() => setOnePost(dispatchAuth, false)}
+        size="sm"
+        variant="warning"
+        className="shadow-none mt-2"
+      >
+        Update
+      </Button>
+      <Button
+        // onClick={() => setOnePost(dispatchAuth, false)}
+        size="sm"
+        variant="danger"
+        className="shadow-none mt-2"
+      >
+        Delete Post
       </Button>
     </Card>
   );

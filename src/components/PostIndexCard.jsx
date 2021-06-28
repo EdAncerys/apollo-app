@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import { useAuthState } from '../Context/Auth/index';
+import {
+  getPosts,
+  getOnePost,
+  createPostAction,
+  useAuthDispatch,
+} from '../Context/Auth/index';
 import { Card, Table, Button } from 'react-bootstrap';
-import { getPosts, getOnePost, useAuthDispatch } from '../Context/Auth/index';
 
 export default function PostIndexCard({ props }) {
   const dispatchAuth = useAuthDispatch();
@@ -14,9 +19,7 @@ export default function PostIndexCard({ props }) {
 
   return (
     <Card bg="Light" text="dark" style={{ width: '100%' }} className="mb-2">
-      <Card.Header>
-        <div style={{ textAlign: 'center' }}>Article List</div>
-      </Card.Header>
+      <Card.Header style={{ textAlign: 'center' }}>Article List</Card.Header>
       <Card.Body>
         <Table responsive bordered hover size="sm">
           <thead>
@@ -32,7 +35,8 @@ export default function PostIndexCard({ props }) {
                 <tr style={{ fontSize: '20px' }} key={post.id.toString() + `a`}>
                   <td key={post.id.toString() + `b`}>{index + 1}</td>
                   <td key={post.id.toString() + `c`}>
-                    <div key={index + 1}>{post.title}</div>
+                    {/* <span key={index + 1}>{post.title}</span> */}
+                    {post.title}
                   </td>
                   <td key={post.id.toString() + `d`}>
                     <Button
@@ -49,6 +53,14 @@ export default function PostIndexCard({ props }) {
             })}
           </tbody>
         </Table>
+        <Button
+          onClick={() => createPostAction(dispatchAuth, { action: true })}
+          size="sm"
+          variant="success"
+          className="shadow-none"
+        >
+          Create Post
+        </Button>
       </Card.Body>
     </Card>
   );
