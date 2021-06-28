@@ -58,30 +58,30 @@ export default function PostCard({ props }) {
             );
           })}
         </Card.Text>
+        <Button
+          onClick={() => setOnePost(dispatchAuth, false)}
+          size="sm"
+          className="shadow-none"
+        >
+          Go Back
+        </Button>
+        <Button
+          // onClick={() => setOnePost(dispatchAuth, false)}
+          size="sm"
+          variant="warning"
+          className="shadow-none mt-2"
+        >
+          Update
+        </Button>
+        <Button
+          onClick={() => deletePost({ id: onePost.id }, jwt, dispatchAuth)}
+          size="sm"
+          variant="danger"
+          className="shadow-none mt-2"
+        >
+          Delete Post
+        </Button>
       </Card.Body>
-      <Button
-        onClick={() => setOnePost(dispatchAuth, false)}
-        size="sm"
-        className="shadow-none"
-      >
-        Go Back
-      </Button>
-      <Button
-        // onClick={() => setOnePost(dispatchAuth, false)}
-        size="sm"
-        variant="warning"
-        className="shadow-none mt-2"
-      >
-        Update
-      </Button>
-      <Button
-        onClick={() => deletePost({ id: onePost.id }, jwt, dispatchAuth)}
-        size="sm"
-        variant="danger"
-        className="shadow-none mt-2"
-      >
-        Delete Post
-      </Button>
     </Card>
   );
 }
