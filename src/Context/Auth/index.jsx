@@ -8,6 +8,8 @@ import {
   createNewPost,
   createPostAction,
   deletePost,
+  updatePostAction,
+  updateOldPost,
 } from './actions';
 
 export {
@@ -22,4 +24,6 @@ export {
   createNewPost,
   createPostAction,
   deletePost,
+  updatePostAction,
+  updateOldPost,
 };

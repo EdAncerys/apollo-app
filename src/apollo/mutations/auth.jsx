@@ -100,3 +100,17 @@ export const MUTATION_DELETE_POST = gql`
     }
   }
 `;
+
+export const MUTATION_UPDATE_POST = gql`
+  mutation updatePost($id: ID!, $title: String, $body: String) {
+    updatePost(
+      input: { where: { id: $id }, data: { title: $title, body: $body } }
+    ) {
+      post {
+        id
+        title
+        body
+      }
+    }
+  }
+`;

@@ -6,14 +6,15 @@ import PostCard from './PostCard';
 import CreatePostCard from './CreatePostCard';
 
 export default function Index({ props }) {
-  const { onePost, posts, createPostAction } = useAuthState();
-  console.log(createPostAction);
+  const { onePost, posts, createPostActionState } = useAuthState();
 
   return (
     <>
-      {posts && !onePost.title && !createPostAction.action && <PostIndexCard />}
+      {posts && !onePost.title && !createPostActionState.action && (
+        <PostIndexCard />
+      )}
       {onePost.title && <PostCard />}
-      {createPostAction.action && <CreatePostCard />}
+      {createPostActionState.action && <CreatePostCard />}
     </>
   );
 }

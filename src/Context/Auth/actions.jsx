@@ -6,6 +6,7 @@ import {
   QUERY_GET_ONE_POST,
   MUTATION_CREATE_POST,
   MUTATION_DELETE_POST,
+  MUTATION_UPDATE_POST,
 } from '../../apollo/mutations/auth';
 
 export const signUp = async (newUserData, dispatchAuth) => {
@@ -154,6 +155,34 @@ export const deletePost = async (deletePostData, jwt, dispatchAuth) => {
   }
 };
 
+export const updateOldPost = async (updatePostData, jwt, dispatchAuth) => {
+  console.log('updatePost triggered');
+  console.log('updatePost', updatePostData);
+  try {
+    //0. Set loading true
+
+    //1. Create new post
+    const updatePostResponse = await client.mutate({
+      mutation: MUTATION_UPDATE_POST,
+      variables: updatePostData,
+    });
+    const { post } = updatePostResponse.data.updatePost;
+    const id = post.id;
+    console.log('post', post); //debug
+
+    //2. Fetch all post & redirect to main
+    getPosts(jwt, dispatchAuth);
+    getOnePost(jwt, id, dispatchAuth);
+    updatePostAction(dispatchAuth, { action: false });
+
+    return post;
+  } catch (err) {
+    console.log('err', err); //debug
+    // console.log(typeof err); //debug
+    // console.log(JSON.stringify(err)); //debug
+  }
+};
+
 export const setToken = (dispatch, jwt) => {
   dispatch({ type: 'SET_TOKEN', payload: jwt });
 };
@@ -170,6 +199,10 @@ export const setPosts = (dispatch, posts) => {
   dispatch({ type: 'SET_POSTS', payload: posts });
 };
 
-export const createPostAction = (dispatch, posts) => {
-  dispatch({ type: 'SET_CREATE_POST_ACTION', payload: posts });
+export const createPostAction = (dispatch, action) => {
+  dispatch({ type: 'SET_CREATE_POST_ACTION', payload: action });
+};
+
+export const updatePostAction = (dispatch, action) => {
+  dispatch({ type: 'SET_UPDATE_POST_ACTION', payload: action });
 };
