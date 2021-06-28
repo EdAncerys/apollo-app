@@ -53,7 +53,7 @@ export const logIn = async (loginData, dispatchAuth) => {
 };
 
 export const getPosts = async (jwt, dispatchAuth) => {
-  // console.log('getPosts triggered')
+  console.log('getPosts triggered');
   try {
     const getPostsResponse = await client.query({
       query: QUERY_GET_POSTS,
@@ -63,7 +63,7 @@ export const getPosts = async (jwt, dispatchAuth) => {
         },
       },
     });
-    console.log('getPostsResponse', getPostsResponse); //debug
+    // console.log('getPostsResponse', getPostsResponse); //debug
     const { posts } = getPostsResponse.data;
     console.log('posts', posts); //debug
 
@@ -101,6 +101,7 @@ export const getOnePost = async (jwt, id, dispatchAuth) => {
 };
 
 export const createNewPost = async (newPostData, jwt, dispatchAuth) => {
+  console.log('createNewPost triggered');
   console.log('newPostData', newPostData);
   try {
     //0. Set loading true
@@ -110,10 +111,14 @@ export const createNewPost = async (newPostData, jwt, dispatchAuth) => {
       mutation: MUTATION_CREATE_POST,
       variables: newPostData,
     });
-    console.log('createPostResponse', createPostResponse); //debug
+    const { post } = createPostResponse.data.createPost;
+    console.log('post', post); //debug
 
-    //2. Fetch all post
-    getPosts(jwt, dispatchAuth);
+    //2. Fetch all post & redirect to main
+    await getPosts(jwt, dispatchAuth);
+    createPostAction(dispatchAuth, { action: false });
+
+    return post;
   } catch (err) {
     console.log('err', err); //debug
     // console.log(typeof err); //debug

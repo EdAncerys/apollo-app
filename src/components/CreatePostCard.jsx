@@ -11,17 +11,15 @@ export default function CreatePostCard({ props }) {
   const dispatchAuth = useAuthDispatch();
   const { jwt } = useAuthState();
 
-  const publishPost = async (e) => {
+  const publishPost = async () => {
     const title = document.querySelector('#title').value;
     const body = document.querySelector('#body').value;
     // const image = document.querySelector('#image').files[0];
     // console.log(image);
+    console.log(jwt);
+    const newPostData = { title, body };
 
-    // createNewPost(
-    //   { title: title, body: body, image: image },
-    //   jwt,
-    //   dispatchAuth
-    // );
+    createNewPost(newPostData, jwt, dispatchAuth);
   };
 
   return (
@@ -53,7 +51,7 @@ export default function CreatePostCard({ props }) {
           </Form.Group>
 
           <Button
-            onClick={(e) => publishPost(e)}
+            onClick={() => publishPost()}
             size="sm"
             variant="success"
             className="shadow-none"

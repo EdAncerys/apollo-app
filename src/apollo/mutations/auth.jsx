@@ -58,14 +58,30 @@ export const QUERY_GET_POSTS = gql`
   }
 `;
 
+// export const MUTATION_CREATE_POST = gql`
+//   mutation createPost($title: String!, $body: String!, $image: Upload) {
+//     createPost(input: { data: { title: $title, body: $body, image: $image } }) {
+//       post {
+//         id
+//         title
+//         body
+//         image
+//       }
+//     }
+//   }
+// `;
+
 export const MUTATION_CREATE_POST = gql`
-  mutation createPost($title: String!, $body: String!, $image: Upload) {
-    createPost(input: { data: { title: $title, body: $body, image: $image } }) {
+  mutation createPost($title: String!, $body: String!) {
+    createPost(input: { data: { title: $title, body: $body } }) {
       post {
         id
         title
         body
-        image
+        image {
+          id
+          url
+        }
       }
     }
   }
