@@ -5,6 +5,7 @@ import {
   QUERY_GET_POSTS,
   QUERY_GET_ONE_POST,
   MUTATION_CREATE_POST,
+  MUTATION_DELETE_POST,
 } from '../../apollo/mutations/auth';
 
 export const signUp = async (newUserData, dispatchAuth) => {
@@ -115,8 +116,34 @@ export const createNewPost = async (newPostData, jwt, dispatchAuth) => {
     console.log('post', post); //debug
 
     //2. Fetch all post & redirect to main
-    await getPosts(jwt, dispatchAuth);
+    getPosts(jwt, dispatchAuth);
     createPostAction(dispatchAuth, { action: false });
+
+    return post;
+  } catch (err) {
+    console.log('err', err); //debug
+    // console.log(typeof err); //debug
+    // console.log(JSON.stringify(err)); //debug
+  }
+};
+
+export const deletePost = async (deletePostData, jwt, dispatchAuth) => {
+  console.log('deletePost triggered');
+  console.log('deletePostData', deletePostData);
+  try {
+    //0. Set loading true
+
+    //1. Create new post
+    const deletePostResponse = await client.mutate({
+      mutation: MUTATION_DELETE_POST,
+      variables: deletePostData,
+    });
+    const { post } = deletePostResponse.data.deletePost;
+    console.log('post', post); //debug
+
+    //2. Fetch all post & redirect to main
+    getPosts(jwt, dispatchAuth);
+    setOnePost(dispatchAuth, {});
 
     return post;
   } catch (err) {

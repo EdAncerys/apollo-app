@@ -7,6 +7,7 @@ import {
   setOnePost,
   createNewPost,
   createPostAction,
+  deletePost,
 } from './actions';
 
 export {
@@ -20,4 +21,5 @@ export {
   setOnePost,
   createNewPost,
   createPostAction,
+  deletePost,
 };

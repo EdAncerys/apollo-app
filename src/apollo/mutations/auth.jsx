@@ -90,3 +90,13 @@ export const MUTATION_CREATE_POST = gql`
     }
   }
 `;
+
+export const MUTATION_DELETE_POST = gql`
+  mutation deletePost($id: ID!) {
+    deletePost(input: { where: { id: $id } }) {
+      post {
+        id
+      }
+    }
+  }
+`;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useAuthState } from '../Context/Auth/index';
-import { setOnePost, useAuthDispatch } from '../Context/Auth/index';
+import { setOnePost, deletePost, useAuthDispatch } from '../Context/Auth/index';
 import { Card, Button } from 'react-bootstrap';
 
 export default function PostCard({ props }) {
   const dispatchAuth = useAuthDispatch();
-  const { onePost } = useAuthState();
+  const { onePost, jwt } = useAuthState();
 
   let postAuthor;
   const findPostAuthor = onePost.users_post;
@@ -75,7 +75,7 @@ export default function PostCard({ props }) {
         Update
       </Button>
       <Button
-        // onClick={() => setOnePost(dispatchAuth, false)}
+        onClick={() => deletePost({ id: onePost.id }, jwt, dispatchAuth)}
         size="sm"
         variant="danger"
         className="shadow-none mt-2"
